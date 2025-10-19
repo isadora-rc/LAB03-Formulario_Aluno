@@ -67,8 +67,8 @@ const atualizarTabela = () => {
             <td>${aluno.notaFinal}</td>
             <td>${aluno.isAprovado() ? 'Sim' : 'Não'}</td>
             <td>
-                <button class="btn btn-warning btn-sm" onclick="editarAluno(${index})">Editar</button>
-                <button class="btn btn-danger btn-sm" onclick="excluirAluno(${index})">Excluir</button>
+                <button class="btn btn-warning btn-sm" >Editar</button>
+                <button class="btn btn-danger btn-sm" >Excluir</button>
             </td>
         `;
 
@@ -101,3 +101,41 @@ const excluirAluno = (index) => {
     alert(`Aluno ${nome} excluído com sucesso!`); // Exercicio 3
     console.log(`Exclusão: ${nome}`);
 }
+
+const relatorioDiv = document.getElementById('relatorio');
+
+document.getElementById('btnAprovados').addEventListener('click', () => {
+    const aprovados = alunos.filter(aluno => aluno.isAprovado());
+    relatorioDiv.innerHTML = `<strong>Alunos Aprovados:</strong><br>${aprovados.map(a => a.nome).join(', ') || 'Nenhum aluno aprovado'}`;
+});
+
+document.getElementById('btnMediaNotas').addEventListener('click', () => {
+    if (alunos.length === 0) {
+        relatorioDiv.innerHTML = 'Nenhum aluno cadastrado.';
+        return;
+    }
+    const mediaNotas = alunos.reduce((acc, aluno) => acc + aluno.notaFinal, 0) / alunos.length;
+    relatorioDiv.innerHTML = `<strong>Média das Notas Finais:</strong> ${mediaNotas.toFixed(2)}`;
+});
+
+document.getElementById('btnMediaIdade').addEventListener('click', () => {
+    if (alunos.length === 0) {
+        relatorioDiv.innerHTML = 'Nenhum aluno cadastrado.';
+        return;
+    }
+    const mediaIdade = alunos.reduce((acc, aluno) => acc + aluno.idade, 0) / alunos.length;
+    relatorioDiv.innerHTML = `<strong>Média das Idades:</strong> ${mediaIdade.toFixed(2)}`;
+});
+
+document.getElementById('btnNomesAlfabetico').addEventListener('click', () => {
+    const nomes = alunos.map(a => a.nome).sort();
+    relatorioDiv.innerHTML = `<strong>Nomes em Ordem Alfabética:</strong><br>${nomes.join(', ') || 'Nenhum aluno cadastrado'}`;
+});
+
+document.getElementById('btnQtdPorCurso').addEventListener('click', () => {
+    const contagem = alunos.reduce((acc, aluno) => {
+        acc[aluno.curso] = (acc[aluno.curso] || 0) + 1;
+        return acc;
+    }, {});
+    relatorioDiv.innerHTML = `<strong>Quantidade de Alunos por Curso:</strong><br>${Object.entries(contagem).map(([curso, qtd]) => `${curso}: ${qtd}`).join('<br>')}`;
+});
