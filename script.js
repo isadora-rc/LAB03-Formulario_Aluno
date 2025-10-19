@@ -33,12 +33,20 @@ formAluno.addEventListener('submit', function(event) {
         //criar novo aluno
         const novoAluno = new Aluno(nome, idade, curso, notaFinal);
         alunos.push(novoAluno);
+
+        alert(`Aluno ${nome} cadastrado com sucesso!`);
+        console.log (`Cadastro:`, novoAluno.toString());
+
     } else {
         //editar aluno existente
         alunos[indiceEdicao].nome = nome;
         alunos[indiceEdicao].idade = idade;
         alunos[indiceEdicao].curso = curso;
         alunos[indiceEdicao].notaFinal = notaFinal;
+
+        alert(`Aluno ${nome} atualizado com sucesso!`);
+        console.log(`Edição:`, alunos[indiceEdicao].toString());
+
         indiceEdicao = null;
     }
 
@@ -47,7 +55,7 @@ formAluno.addEventListener('submit', function(event) {
 });
 
 //atualiza a tabela
-function atualizarTabela() {
+const atualizarTabela = () => {
     corpoTabela.innerHTML = '';
 
     alunos.forEach((aluno, index) => {
@@ -63,12 +71,20 @@ function atualizarTabela() {
                 <button class="btn btn-danger btn-sm" onclick="excluirAluno(${index})">Excluir</button>
             </td>
         `;
+
+        tr.querySelector('.btn-warning').addEventListener('click', function() {
+            editarAluno(index);
+        });
+        tr.querySelector('.btn-danger').addEventListener('click', function() {
+            excluirAluno(index);
+        });
+
         corpoTabela.appendChild(tr);
     });
 }
 
 //editar aluno
-function editarAluno(index) {
+const editarAluno = (index) => {
     const aluno = alunos[index];
     document.getElementById('nome').value = aluno.nome;
     document.getElementById('idade').value = aluno.idade;
@@ -78,7 +94,10 @@ function editarAluno(index) {
 }
 
 //excluir aluno
-function excluirAluno(index) {
+const excluirAluno = (index) => {
+    const nome = alunos[index].nome;
     alunos.splice(index, 1);
     atualizarTabela();
+    alert(`Aluno ${nome} excluído com sucesso!`); // Exercicio 3
+    console.log(`Exclusão: ${nome}`);
 }
