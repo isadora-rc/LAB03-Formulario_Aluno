@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+</head>
+
+<body>
+    <hr>
+    <h2>Formulário de Alunos</h2>
+
+    <form action="" method="post">
+
+        <!--campos do formulário-->
+        <label for="nome">Nome:</label> <br>
+        <input type="text" id="nome" name="nome" required placeholder="Digite o nome do aluno..."> <br>
+
+        <label for="idade">Idade:</label> <br>
+        <input type="number" id="idade" name="idade" required placeholder="Digite a idade..."> <br>
+
+        <label for="curso">Curso:</label> <br>
+        <select id="curso" name="curso" required>
+            <option value="">Selecione...</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+        </select> <br>
+
+        <label for="notaFinal">Nota Final:</label> <br>
+        <input type="number" id="notaFinal" name="notaFinal" required placeholder="Digite a nota final..."> <br> <br>
+
+        <input id="salvar" type="submit" value="Cadastrar">
+    </form>
+
+    <hr>
+
+    <h2>Tabela de Alunos</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th bgcolor="lightblue" width="100">ID</th>
+                <th bgcolor="lightblue" width="150">Nome</th>
+                <th bgcolor="lightblue" width="80">Idade</th>
+                <th bgcolor="lightblue" width="120">Curso</th>
+                <th bgcolor="lightblue" width="100">Nota Final</th>
+                <th bgcolor="lightblue" width="150">Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabela">
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Relatórios</h2>
+    <button id="relAprovados">Alunos Aprovados (nota >= 7)</button>
+    <button id="relMediaNotas">Média das Notas</button>
+    <button id="relMediaIdade">Média das Idades</button>
+    <button id="relNomes">Nomes em Ordem Alfabética</button>
+    <button id="relCursos">Quantidade de Alunos por Curso</button>
+
+    <div id="resultado" style="margin-top: 20px;"></div>
+
+    <script src="formulario.js"></script>
+</body>
+</html>
